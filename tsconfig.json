@@ -31,10 +31,10 @@
 		"jsxImportSource": "react",
 		"jsx": "react-jsx",
 		"allowSyntheticDefaultImports": true,
-		"useDefineForClassFields": true
+		"useDefineForClassFields": true,
 	},
 	"include": [
-		"./src",
+		"./src"
 	],
 	"exclude": [
 		"node_modules"

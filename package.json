@@ -1,46 +1,45 @@
 {
-  "name": "react-even-better-router-dom",
-  "version": "0.0.0",
-  "keywords": [
-    "renum",
-    "react",
-    "react-dom",
-    "library",
-    "components",
-    "ui",
-    "nodeps"
-  ],
-  "license": "MIT",
-  "type": "module",
-  "main": "es/index.js",
-  "types": "es/index.d.ts",
-  "sideEffects": false,
-  "author": {
-    "name": "Byrone",
-    "url": "https://github.com/byr0n3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/byr0n3/react-even-better-router-dom"
-  },
-  "bugs": "https://github.com/byr0n3/react-even-better-router-dom/issues",
-  "scripts": {
-    "build": "tsc"
-  },
-  "files": [
-    "dist/**/*"
-  ],
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "devDependencies": {
-    "@types/react": "^18.0.24",
-    "@types/react-dom": "^18.0.8",
-    "typescript": "^4.8.4"
-  }
+	"name": "react-even-better-router-dom",
+	"version": "0.0.0",
+	"keywords": [
+		"react",
+		"react-dom",
+		"library",
+		"components",
+		"nodeps"
+	],
+	"license": "MIT",
+	"type": "module",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"sideEffects": false,
+	"author": {
+		"name": "Byrone",
+		"url": "https://github.com/byr0n3"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/byr0n3/react-even-better-router-dom"
+	},
+	"bugs": "https://github.com/byr0n3/react-even-better-router-dom/issues",
+	"scripts": {
+		"build": "tsc",
+		"dev": "yarn build && cp -rf dist ../portfolio2/node_modules/react-even-better-router-dom"
+	},
+	"files": [
+		"dist/**/*"
+	],
+	"dependencies": {
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
+	},
+	"peerDependencies": {
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
+	},
+	"devDependencies": {
+		"@types/react": "^18.0.24",
+		"@types/react-dom": "^18.0.8",
+		"typescript": "^4.8.4"
+	}
 }

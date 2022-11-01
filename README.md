@@ -14,7 +14,7 @@ than attempted murder at this point.
 ## Install
 
 ```sh
-yarn add @enumiton/renum
+yarn add react-even-better-router-dom
 ```
 
 ## Usage

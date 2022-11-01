@@ -1,11 +1,10 @@
 {
 	"name": "react-even-better-router-dom",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"keywords": [
 		"react",
 		"react-dom",
 		"library",
-		"components",
 		"nodeps"
 	],
 	"license": "MIT",

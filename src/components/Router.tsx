@@ -1,17 +1,18 @@
-import type { ReactNode } from 'react';
-import { useEffect, useState } from 'react';
+import type { FunctionComponent } from 'react';
+import { createElement, useEffect, useMemo, useState } from 'react';
 import { addPopStateListener, addPushStateListener, addReplaceStateListener } from '../events';
+import { $flusher } from '../helpers/flusher';
 
-type RouteDefinition = Record<string, ReactNode>;
+type RouteDefinition = Record<string, FunctionComponent>;
 
 interface RouterProps {
 	readonly routes: RouteDefinition;
-	readonly fallback?: ReactNode;
+	readonly fallback?: FunctionComponent;
 }
 
 const SLASH = '/';
 
-function ensurePrefix(value: string) {
+function sanitizePath(value: string) {
 	if (value.slice(0, SLASH.length) !== SLASH) {
 		return SLASH + value;
 	}
@@ -20,37 +21,41 @@ function ensurePrefix(value: string) {
 }
 
 function Router({ routes, fallback }: RouterProps) {
-	const [component, setComponent] = useState<ReactNode>(getCurrentComponent());
+	const [path, setPath] = useState<string>(getCurrentPath());
 
 	useEffect(function () {
-		const unsubscribe = addPopStateListener(updateComponent);
-		const unsubscribe1 = addPushStateListener(updateComponent);
-		const unsubscribe2 = addReplaceStateListener(updateComponent);
+		const flusher = $flusher([
+			addPopStateListener(updateComponent),
+			addPushStateListener(updateComponent),
+			addReplaceStateListener(updateComponent),
+		]);
 
-		return function () {
-			unsubscribe();
-			unsubscribe1();
-			unsubscribe2();
-		};
+		return flusher.flush;
 	}, []);
 
 	function updateComponent() {
-		setComponent(getCurrentComponent());
+		setPath(getCurrentPath());
+	}
+
+	function getCurrentPath() {
+		return sanitizePath(window.location.pathname);
 	}
 
 	function getCurrentComponent() {
-		const path = ensurePrefix(window.location.pathname);
-
 		for (const key in routes) {
-			if (ensurePrefix(key) === path) {
-				return routes[key];
+			if (sanitizePath(key) === path) {
+				return createElement(routes[key]!);
 			}
 		}
 
-		return fallback ?? null;
+		if (fallback) {
+			return createElement(fallback);
+		}
+
+		return null;
 	}
 
-	return component;
+	return useMemo(getCurrentComponent, [path]);
 }
 
 export { Router };

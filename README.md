@@ -43,7 +43,7 @@ function App() {
 		<div>
 			<Router
 				routes={ ROUTES }
-				fallback={ () => <span>404 Not found</span> }
+				fallback={ () => <span>404 not found</span> }
 			/>
 		</div>
 	);

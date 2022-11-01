@@ -7,8 +7,9 @@
 Because every other router just doesn't cut it anymore 🤡
 
 ## Motivation
+
 Because React sucks and every React Router sucks
-and everything sucks and being a web developer is a worse crime 
+and everything sucks and being a web developer is a worse crime
 than attempted murder at this point.
 
 ## Install
@@ -19,7 +20,35 @@ yarn add react-even-better-router-dom
 
 ## Usage
 
-idk
+```tsx
+function Home() {
+	return (
+		<h1>Home</h1>
+	);
+}
+
+function Test() {
+	return (
+		<h1>Test</h1>
+	);
+}
+
+const ROUTES = {
+	'': Home,
+	'/test': Test,
+};
+
+function App() {
+	return (
+		<div>
+			<Router
+				routes={ ROUTES }
+				fallback={ () => <span>404 Not found</span> }
+			/>
+		</div>
+	);
+}
+```
 
 ## Types
 

@@ -1,23 +1,25 @@
-import type { FunctionComponent } from 'react';
-import { createElement, useEffect, useMemo, useState } from 'react';
+import type { ComponentPropsWithRef, ComponentType, FunctionComponent, LazyExoticComponent } from 'react';
+import { createElement, Suspense, useEffect, useMemo, useState } from 'react';
+import type { RouteCollection } from '../helpers/routes';
+import type { ComponentProps } from '../types/routes';
 import { addPopStateListener, addPushStateListener, addReplaceStateListener } from '../events';
 import { $flusher } from '../helpers/flusher';
+import { sanitizePath } from '../helpers/url';
+import { isLazy } from '../helpers/is';
 
-type RouteDefinition = Record<string, FunctionComponent>;
+type Props<T extends ComponentType = ComponentType> = ComponentProps & ComponentPropsWithRef<T>;
 
 interface RouterProps {
-	readonly routes: RouteDefinition;
+	readonly routes: RouteCollection;
 	readonly fallback?: FunctionComponent;
 }
 
-const SLASH = '/';
+function getCurrentPath() {
+	return sanitizePath(window.location.pathname);
+}
 
-function sanitizePath(value: string) {
-	if (value.slice(0, SLASH.length) !== SLASH) {
-		return SLASH + value;
-	}
-
-	return value;
+function wrapSuspense<T extends ComponentType>(component: LazyExoticComponent<T>, props: Props<T>) {
+	return createElement(Suspense, { children: createElement(component, props) });
 }
 
 function Router({ routes, fallback }: RouterProps) {
@@ -37,15 +39,21 @@ function Router({ routes, fallback }: RouterProps) {
 		setPath(getCurrentPath());
 	}
 
-	function getCurrentPath() {
-		return sanitizePath(window.location.pathname);
-	}
-
 	function getCurrentComponent() {
-		for (const key in routes) {
-			if (sanitizePath(key) === path) {
-				return createElement(routes[key]!);
+		const result = routes.component(path);
+
+		if (result) {
+			const [component, match] = result;
+
+			const props = { match: match.pathname.groups } as Props;
+
+			const lazy = isLazy(component);
+
+			if (lazy) {
+				return wrapSuspense(component, props);
 			}
+
+			return createElement(component as FunctionComponent, props);
 		}
 
 		if (fallback) {

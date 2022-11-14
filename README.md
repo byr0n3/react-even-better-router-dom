@@ -1,4 +1,4 @@
-<img alt="Logo" src="logo.svg">
+<img alt="Logo" style="display: block;margin: 0 auto -26px;" src="logo.png">
 
 # React Even Better Router DOM
 

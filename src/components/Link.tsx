@@ -1,20 +1,15 @@
-import type { LinkHTMLAttributes } from 'react';
-import type { MouseEvent } from 'react';
+import type { LinkHTMLAttributes, MouseEvent } from 'react';
 import { $history } from '../history';
 
 function Link({ onClick: $onClick, children, ...props }: LinkHTMLAttributes<HTMLAnchorElement>) {
 	function onClick(event: MouseEvent<HTMLAnchorElement>) {
-		const $this = event.target as HTMLAnchorElement;
+		const $this = event.currentTarget;
 
 		if ($onClick) {
 			$onClick.call($this, event);
 		}
 
-		if (event.defaultPrevented) {
-			return;
-		}
-
-		if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || event.button !== 0) {
+		if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || event.button !== 0) {
 			return;
 		}
 

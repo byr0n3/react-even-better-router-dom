@@ -1,5 +1,4 @@
-![Logo](./art/logo.svg)
-<img src="./art/logo.svg">
+![Logo](https://raw.githubusercontent.com/byr0n3/react-even-better-router-dom/master/art/logo.svg)
 
 # React Even Better Router DOM
 

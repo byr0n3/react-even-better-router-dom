@@ -1,5 +1,4 @@
 import type { EvenBetterHistory } from './types/history';
-import { EMPTY } from './helpers';
 
 const windowHistory = window.history;
 
@@ -17,10 +16,10 @@ for (const name of replace) {
 
 const $history: EvenBetterHistory = Object.freeze({
 	push(url?: string | URL | null) {
-		windowHistory.pushState(undefined, EMPTY, url);
+		windowHistory.pushState(undefined, '', url);
 	},
 	replace(url?: string | URL | null) {
-		windowHistory.replaceState(undefined, EMPTY, url);
+		windowHistory.replaceState(undefined, '', url);
 	},
 });
 

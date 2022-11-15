@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.1.1
+
+- Small code refactors
+
 ## v0.1.0
 
 - Fixed bug where the `Link` component sometimes wouldn't work

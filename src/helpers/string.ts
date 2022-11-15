@@ -1,7 +1,5 @@
 import { isNumber } from './is';
 
-const EMPTY = '';
-
 function stringComparer(a: string, b: string): number {
 	// noinspection IfStatementWithTooManyBranchesJS
 	if (isNumber(a) && isNumber(b)) {
@@ -15,4 +13,4 @@ function stringComparer(a: string, b: string): number {
 	}
 }
 
-export { EMPTY, stringComparer };
+export { stringComparer };

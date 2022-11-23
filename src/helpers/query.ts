@@ -1,9 +1,7 @@
-import { stringComparer } from './string';
-
 function queryStringify(value: Record<string, string | number | undefined>, exclude?: string[]): string {
 	let result = '';
 
-	for (const key of Object.keys(value).sort(stringComparer)) {
+	for (const key of Object.keys(value)) {
 		if (exclude && exclude.indexOf(key) !== -1) {
 			continue;
 		}

@@ -1,6 +1,6 @@
 import type { RouteComponent, RouteDefinition } from '../types/routes';
-import { generatePath, URLPattern } from './url';
 import type { URLPatternResult } from '../types/url';
+import { generatePath, URLPattern } from './url.js';
 
 type RouteCollectionItem = readonly [RouteComponent, URLPattern];
 
@@ -12,7 +12,7 @@ function* map(routes: RouteDefinition): Generator<RouteCollectionItem, void> {
 	}
 }
 
-class RouteCollection implements Iterable<RouteCollectionItem> {
+class RouteCollection {
 	readonly #items: ReadonlyMap<RouteComponent, URLPattern>;
 
 	public constructor(routes: RouteDefinition) {
@@ -39,10 +39,6 @@ class RouteCollection implements Iterable<RouteCollectionItem> {
 		}
 
 		return null;
-	}
-
-	public [Symbol.iterator](): IterableIterator<RouteCollectionItem> {
-		return this.#items.entries();
 	}
 }
 

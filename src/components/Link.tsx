@@ -1,5 +1,5 @@
 import type { LinkHTMLAttributes, MouseEvent } from 'react';
-import { $history } from '../history';
+import { $history } from '../history.js';
 
 function Link({ onClick: $onClick, children, ...props }: LinkHTMLAttributes<HTMLAnchorElement>) {
 	function onClick(event: MouseEvent<HTMLAnchorElement>) {

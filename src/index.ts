@@ -1,14 +1,16 @@
-export { Link } from './components/Link';
-export { Router } from './components/Router';
+/* === Components === */
 
-export { makeRoutes } from './helpers/routes';
+export { Link } from './components/Link.js';
+export { Router } from './components/Router/index.js';
 
-export { addPopStateListener, addPushStateListener, addReplaceStateListener } from './events';
-export { $history } from './history';
+/* === Routing & Events === */
+
+export { makeRoutes } from './helpers/routes.js';
+export { $history } from './history.js';
+export { addPopStateListener, addPushStateListener, addReplaceStateListener } from './events.js';
 
 /* === Types === */
 
-export type { EventListener } from './types/events';
-export type { EvenBetterHistory } from './types/history';
-export type { RouteComponent, RouteDefinition, RouteComponentProps } from './types/routes';
+export type { CustomHistory } from './types/history';
+export type { RouteDefinition, RouteComponentProps } from './types/routes';
 export type { URLPatternResult } from './types/url';

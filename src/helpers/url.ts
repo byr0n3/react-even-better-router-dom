@@ -1,13 +1,12 @@
 import type { URLPatternResult } from '../types/url';
-import { queryStringify } from './query';
+import { queryStringify } from './query.js';
 
-const VALID = '[^/]+'; // Inverse of https://tools.ietf.org/html/rfc3986#section-3.3
 const SLASH = '/';
 
 const PATHNAME_PATTERN = /\/:([a-z]+)(?:\((.*?)\))?(\?)?/g;
 const TEMPLATE_PATTERN = /\/{([a-z]+)}/g;
 
-function pathnameReplacer(_: string, $1: string, $2: string = VALID, $3: string = ''): string {
+function pathnameReplacer(_: string, $1: string, $2: string = '[^/]+', $3: string = ''): string {
 	return `(?:/(?<${ $1 }>${ $2 }))${ $3 }`;
 }
 
@@ -19,22 +18,17 @@ class URLPattern {
 	public readonly template: string;
 	public readonly pathname: string;
 
-	public readonly test = this.#test.bind(this);
 	public readonly exec = this.#exec.bind(this);
 
 	readonly #pathname: RegExp;
 
 	public constructor(pathname: string) {
 		pathname = sanitizePath(pathname);
-		
+
 		this.#pathname = pathnameToRegExp(pathname);
 
 		this.template = pathname.replace(PATHNAME_PATTERN, SLASH + '{$1}');
 		this.pathname = pathname;
-	}
-
-	#test(input: string): boolean {
-		return this.#pathname.test(decodeURI(input));
 	}
 
 	#exec(input: string): URLPatternResult | null {

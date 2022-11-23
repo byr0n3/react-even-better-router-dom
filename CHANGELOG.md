@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.2
+
+- Some more code refactoring
+- Removed/inlined some imports & exports
+
 ## v0.1.1
 
 - Small code refactors

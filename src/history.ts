@@ -1,4 +1,4 @@
-import type { EvenBetterHistory } from './types/history';
+import type { CustomHistory } from './types/history';
 
 const windowHistory = window.history;
 
@@ -14,7 +14,7 @@ for (const name of replace) {
 	};
 }
 
-const $history: EvenBetterHistory = Object.freeze({
+const $history: CustomHistory = Object.freeze({
 	push(url?: string | URL | null) {
 		windowHistory.pushState(undefined, '', url);
 	},

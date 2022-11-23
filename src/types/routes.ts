@@ -6,7 +6,7 @@ type RouteDefinition = Record<string, RouteComponent>;
 
 type ComponentProps = Record<string, string | number | undefined>;
 
-type RouteComponentProps = {
+interface RouteComponentProps {
 	readonly match: ComponentProps;
 }
 

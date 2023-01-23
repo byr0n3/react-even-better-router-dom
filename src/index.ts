@@ -2,12 +2,14 @@
 
 export { Link } from './components/Link.js';
 export { Router } from './components/Router/index.js';
+export { PostNavigationOptions, PostNavigationFocusOptions } from './components/Router/helpers.js';
 
-/* === Routing & Events === */
+/* === Routing, events & helpers === */
 
 export { makeRoutes } from './helpers/routes.js';
 export { $history } from './history.js';
 export { addPopStateListener, addPushStateListener, addReplaceStateListener } from './events.js';
+export { flusher } from './helpers/flusher.js';
 
 /* === Types === */
 

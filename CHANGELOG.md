@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.1.3
+
+- Added `postNavigation` and `postNavigationFocus` attributes to `Router` component
+    - `postNavigation` is used to control the scroll behavior after navigating to a different page
+    - `postNavigationFocus` is used to control what element should be focussed after navigating to a different page
+- Exported `flusher` helper
+
 ## v0.1.2
 
 - Some more code refactoring

@@ -1,15 +1,13 @@
-function $flusher(items: VoidFunction[]) {
-	const callbacks = [...items];
-
+function flusher(items: VoidFunction[]) {
 	function add(item: VoidFunction | undefined) {
 		if (item) {
-			callbacks.push(item);
+			items.push(item);
 		}
 	}
 
 	function flush() {
-		while (!!callbacks.length) {
-			const callback = callbacks.shift();
+		while (!!items.length) {
+			const callback = items.shift();
 			callback?.();
 		}
 	}
@@ -20,4 +18,4 @@ function $flusher(items: VoidFunction[]) {
 	});
 }
 
-export { $flusher };
+export { flusher };
